@@ -1,0 +1,18 @@
+our application should include a scoreboard, which counts the current score, 
+and a “Best Score”, which shows the highest score you’ve achieved thus far.
+
+header:
+    2 divs
+    div left:
+        h1, p
+    div right: 
+        best score, score
+
+
+CARD:
+    - simple version:
+        cards just have pix. no names. 
+    - complext version:
+        cards with names at the bottom.
+    
+    first render 20 cards from the api with the pokemon name on them.
