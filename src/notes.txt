@@ -9,10 +9,14 @@ header:
         best score, score
 
 
-CARD:
+CARDs:
     - simple version:
         cards just have pix. no names. 
     - complext version:
         cards with names at the bottom.
     
     first render 20 cards from the api with the pokemon name on them.
+
+every click should change the order of the pokemon
+    trigger function shuffleArray with every click
+
