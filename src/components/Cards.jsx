@@ -1,36 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import Card from './Card';
 
-    function Cards() {
-    const [pokemon, setPokemon] = useState([]);
-    const [pokemonImage, setPokemonImage] = useState([]);
+    function Cards({score, setScore}) {
+    const [pokemonArray, setPokemonArray] = useState([]);
+    const [pokemonImageArray, setPokemonImageArray] = useState([]);
+    const [clickedPokemonArray, setClickedPokemonArray] = useState([]);
 
     useEffect(() => {
         async function fetchPokemon() {
         const response = await fetch('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20');
         const data = await response.json();
-        setPokemon(data.results);
+        setPokemonArray(data.results);
         }
 
         fetchPokemon();
     }, []);
 
     useEffect(() => {
-        if (pokemon.length > 0) {
+        if (pokemonArray.length > 0) {
         const fetchImages = async () => {
-            const images = await Promise.all(
-            pokemon.map(async (p) => {
-                const res = await fetch(p.url);
+            const imagesArray = await Promise.all(
+            pokemonArray.map(async (pokemon) => {
+                const res = await fetch(pokemon.url);
                 const data = await res.json();
                 return data.sprites.front_default;
             })
             );
-            setPokemonImage(images);
+            setPokemonImageArray(imagesArray);
         };
 
         fetchImages();
         }
-    }, [pokemon]);
+    }, [pokemonArray]);
 
     function shuffleArray(array) {
         const newArray = array.slice();
@@ -41,19 +42,34 @@ import Card from './Card';
         return newArray
     }
 
-    function onCardClick() {
-        const newPokemon = shuffleArray(pokemon);
-        setPokemon(newPokemon);
+
+    function onCardClick(pokemon) {
+        console.log(`${pokemon.name} was clicked!`);
+        if(clickedPokemonArray.includes(pokemon.name)) {
+            console.log(clickedPokemonArray)
+        }
+        else{
+            setClickedPokemonArray(prevArray => [...prevArray, pokemon.name]); 
+            setScore(prevScore => prevScore + 1)  
+            const shuffledPokemon = shuffleArray(pokemonArray);
+            setPokemonArray(shuffledPokemon);
+        }
     }
+
+
+
+    // useEffect(() => {
+    //     console.log(clickedPokemonArray);
+    // }, [clickedPokemonArray]);
 
     return (
         <div className="cards-container">
-            {pokemon.map((pokemon, index) => (
+            {pokemonArray.map((pokemon, index) => (
                 <Card 
-                    onClick={onCardClick}
+                    onClick={() => onCardClick(pokemon)}
                     key={index}
                     name={pokemon.name}
-                    pokemonImg={pokemonImage[index]}
+                    pokemonImg={pokemonImageArray[index]}
                 />
             ))}
         </div>

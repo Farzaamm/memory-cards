@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Header() {
+function Header({score}) {
   return (
     <div>
       <div className="header-left">
@@ -9,7 +9,7 @@ function Header() {
       </div>
 
       <div className="header-right">
-        <h4>Score: 0</h4>
+        <h4>Score: {score}</h4>
         <h4>High Score: 0</h4>
       </div>
     </div>
