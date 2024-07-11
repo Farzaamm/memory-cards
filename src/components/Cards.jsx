@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Card from './Card';
 
-    function Cards({score, setScore}) {
+    function Cards({score, setScore, setGameOverScreen}) {
     const [pokemonArray, setPokemonArray] = useState([]);
     const [pokemonImageArray, setPokemonImageArray] = useState([]);
     const [clickedPokemonArray, setClickedPokemonArray] = useState([]);
@@ -42,11 +42,19 @@ import Card from './Card';
         return newArray
     }
 
+    function gameOver() {
+        setGameOverScreen(true);
+        setClickedPokemonArray([]);
+        const shuffledPokemon = shuffleArray(pokemonArray);
+        setPokemonArray(shuffledPokemon);
+    }
+
 
     function onCardClick(pokemon) {
-        console.log(`${pokemon.name} was clicked!`);
+        // console.log(`${pokemon.name} was clicked!`);
         if(clickedPokemonArray.includes(pokemon.name)) {
-            console.log(clickedPokemonArray)
+            // console.log(clickedPokemonArray)
+            gameOver();
         }
         else{
             setClickedPokemonArray(prevArray => [...prevArray, pokemon.name]); 
