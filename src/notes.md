@@ -50,8 +50,9 @@ every click should change the order of the pokemon
     [x] score state gets updated with the clickedPokemon.length
         1. make a score state in the parent component
         2. pass the state and setter to the sibling components
-    [] high score shows the highest score
-
+    [x] store high score in local storage
+    [x] high score shows the highest score
+    [] reset/game over func
 
 ### aesthetics
     add some *skeleton screen* effect to the cards
